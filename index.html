@@ -13,6 +13,9 @@
     <script>
         console.log("Hello World!!!");
 
+        //Global Variables
+        let humanScore=0;
+        let computerScore=0;
 
         //Get Computer Choice
 
@@ -39,6 +42,26 @@
                 return "invalid";
         }
 
+        //Play Round
+
+        function playRound(humanChoice, computerChoice)
+        {
+            //When Human is Winner
+            if(humanChoice==="rock" && computerChoice === "scissor")
+                return "User";
+            else if(humanChoice==="paper" && computerChoice === "rock")
+                return "User";
+            else if(humanChoice==="scissor" && computerChoice === "paper")
+                return "User";
+
+            //When Computer is Winnner
+            else if(humanChoice==="rock" && computerChoice === "paper")
+                return "Computer";
+            else if(humanChoice==="paper" && computerChoice === "scissor")
+                return "Computer";
+            else if(humanChoice==="scissor" && computerChoice === "rock")
+                return "Computer";
+        }
 
     </script>
 </body>
