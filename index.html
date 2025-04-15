@@ -12,6 +12,25 @@
 
     <script>
         console.log("Hello World!!!");
+
+
+        //Get Computer choice
+
+        function getComputerChoice()
+        {
+            let choiceComputer=Math.floor(Math.random()*3)+1;
+            console.log(choiceComputer);
+            switch(choiceComputer)
+            {
+                case 1: return "rock";
+                case 2: return "paper";
+                case 3: return "scissor";
+            }
+        }
+
+
+
+
     </script>
 </body>
 </html>
