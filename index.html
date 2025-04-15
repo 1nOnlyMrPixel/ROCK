@@ -22,7 +22,6 @@
         function getComputerChoice()
         {
             let choiceComputer=Math.floor(Math.random()*3)+1;
-            console.log(choiceComputer);
             switch(choiceComputer)
             {
                 case 1: return "rock";
@@ -35,17 +34,20 @@
         function getHumanChoice()
         {
             let humanChoice=prompt("Enter your choice:").toLowerCase();
-            console.log(humanChoice);
             if(humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissor" )
                 return humanChoice;
             else
-                return "invalid";
+                {
+                    console.error("Please enter within \'Rock Paper Scissor only\'");
+                    return "invalid";
+                }
         }
 
         //Play Round
 
         function playRound(humanChoice, computerChoice)
         {
+            console.log(`Computer Chose:${computerChoice}\nUser Chose:${humanChoice}\n`);
             //When Human is Winner
             if(humanChoice==="rock" && computerChoice === "scissor")
                 return "User";
@@ -61,8 +63,43 @@
                 return "Computer";
             else if(humanChoice==="scissor" && computerChoice === "rock")
                 return "Computer";
+            else if(humanChoice===computerChoice)
+                return "tie";
+            else
+                {
+                return "invalid";
+                }
         }
-
+        
+        //Play 5 rounds
+        
+        for(let i=1;i<=5;i++)
+        {
+            console.log(`--------------------------------Round${i}----------------------------------------------`)
+            let winner=playRound(getHumanChoice(),getComputerChoice());
+            if(winner.toLowerCase()==="user"){
+                console.log("User Won this Round");
+                humanScore++;
+            }
+            else if(winner.toLowerCase()==="computer")
+            {
+                console.log("Computer Won this Round");
+                computerScore++;
+            }
+            else if(winner.toLowerCase()==="tie")
+                console.log("This Round has been Tied");
+            else if(winner.toLowerCase()==="invalid")
+            {
+                console.log("Invalid Input by the user");
+                i--;
+            }
+        }
+        if(computerScore>humanScore)
+            console.log(`You Lose Computer is the Winner\t\t Human:${humanScore},Computer:${computerScore}`);
+        else if(humanScore>computerScore)
+            console.log(`Yay You Won\t\t Human:${humanScore},Computer:${computerScore}`);
+        else if(humanScore===computerScore)
+            console.log(`Oh! It's a tie!!\t\t Human:${humanScore},Computer:${computerScore}`);
     </script>
 </body>
 </html>
