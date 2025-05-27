@@ -39,6 +39,14 @@
             font-size: 20px;
             border-radius: 10px;
             text-align: center;
+            color:white;
+            font-weight: 600;
+            background-color: rgb(140, 28, 231);
+        }
+        .resetBtn:hover
+        {
+            background-color: rgb(188, 138, 230);
+            transform: scale(1.1);
         }
 
         .userContainer {
@@ -48,6 +56,10 @@
             align-items: center;
             justify-content: center;
             justify-content: space-evenly;
+        }
+        .userContainer button:hover
+        {
+            transform: scale(1.1);
         }
         .computerContainer {
             display: flex;
@@ -127,6 +139,7 @@
         const allButtons = Array.from(document.querySelectorAll("button"));
         const userContainer = document.querySelector(".userContainer");
         const computerContainer=document.querySelector(".computerContainer");
+        const resetBtn=document.querySelector(".resetBtn");
         function resetScore()
         {
             resetButtonColor();
@@ -136,10 +149,16 @@
             user_score.textContent = humanScore;
         }
 
+        resetBtn.addEventListener("click",resetScore);
+
+
         function resetButtonColor() {
             allButtons.forEach(function (e) {
+            if(e.className!=="resetBtn")
+            {
                 e.style.backgroundColor = "#E9E9ED";
                 e.style.border = "1px solid black";
+            }
             })
         }
         function animateWinnerButtonColor(e) {
@@ -151,8 +170,8 @@
             e.style.border = "1px solid #EB7145";
         }
         function animateTieButtonColor(e) {
-            e.style.backgroundColor = "#E7E610";
-            e.style.border = "1px solid #E7E610";
+            e.style.backgroundColor = "yellow";
+            e.style.border = "1px solid yellow";
         }
 
         userContainer.addEventListener("click", function (e) {
