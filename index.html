@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
+    <style>
+        button
+        {
+            height: 250px;
+            width: 250px;
+            font-size: 80px;
+            border-radius: 120px;
+        }
+        .container
+        {
+            display: flex;
+            height: 400px;
+            width: 100vw;
+            align-items: center;
+            justify-content: center;
+            justify-content: space-evenly;
+        }
+    </style>
 </head>
 <body>
     
-
-
+    <div class="container">
+        <button id="rock">🪨</button>
+        <button id="paper">🧻</button>
+        <button id="scissor">✂️</button>
+    </div>
+        
 
     <script>
+
+
+        const container=document.querySelector(".container");
+        container.addEventListener("click",e=>console.log(e.target.id));
+
+
+
         console.log("Hello World!!!");
 
         //Global Variables
@@ -73,27 +102,28 @@
         
         //Play 5 rounds
         
-        for(let i=1;i<=5;i++)
-        {
-            console.log(`--------------------------------Round${i}----------------------------------------------`)
-            let winner=playRound(getHumanChoice(),getComputerChoice());
-            if(winner.toLowerCase()==="user"){
-                console.log("User Won this Round");
-                humanScore++;
-            }
-            else if(winner.toLowerCase()==="computer")
-            {
-                console.log("Computer Won this Round");
-                computerScore++;
-            }
-            else if(winner.toLowerCase()==="tie")
-                console.log("This Round has been Tied");
-            else if(winner.toLowerCase()==="invalid")
-            {
-                console.log("Invalid Input by the user");
-                i--;
-            }
-        }
+        // for(let i=1;i<=5;i++)
+        // {
+        //     console.log(`--------------------------------Round${i}----------------------------------------------`)
+        //     let winner=playRound(getHumanChoice(),getComputerChoice());
+        //     if(winner.toLowerCase()==="user"){
+        //         console.log("User Won this Round");
+        //         humanScore++;
+        //     }
+        //     else if(winner.toLowerCase()==="computer")
+        //     {
+        //         console.log("Computer Won this Round");
+        //         computerScore++;
+        //     }
+        //     else if(winner.toLowerCase()==="tie")
+        //         console.log("This Round has been Tied");
+        //     else if(winner.toLowerCase()==="invalid")
+        //     {
+        //         console.log("Invalid Input by the user");
+        //         i--;
+        //     }
+        // }
+
         if(computerScore>humanScore)
             console.log(`You Lose Computer is the Winner\t\t Human:${humanScore},Computer:${computerScore}`);
         else if(humanScore>computerScore)
