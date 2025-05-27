@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
     <style>
-        body
-        {
+        body {
             margin: 0;
             padding: 0;
-            font-family:"JetBrains Mono";
+            font-family: "JetBrains Mono";
         }
-        button
-        {
+
+        button {
             height: 150px;
             width: 150px;
             font-size: 80px;
             border-radius: 120px;
         }
-        .computerContainer button
-        {
+
+        .computerContainer button {
             border-radius: 20px;
         }
-        .container
-        {
+
+        .container {
             display: flex;
             height: 200px;
             width: 100vw;
@@ -31,8 +31,8 @@
             justify-content: center;
             justify-content: space-evenly;
         }
-        .score-board
-        {
+
+        .score-board {
             display: flex;
             flex-direction: column;
             height: 100px;
@@ -42,13 +42,13 @@
             text-align: center;
             box-sizing: border-box;
         }
-        .score-board p
-        {
+
+        .score-board p {
             font-weight: 600;
             font-size: 18px;
         }
-        .computerContainer
-        {
+
+        .computerContainer {
             display: flex;
             height: 200px;
             width: 100vw;
@@ -58,12 +58,13 @@
         }
     </style>
 </head>
+
 <body>
-    
+
     <div class="computerContainer">
-        <button id="rock">🪨</button>
-        <button id="paper">🧻</button>
-        <button id="scissor">✂️</button>
+        <button id="computer-rock">🪨</button>
+        <button id="computer-paper">🧻</button>
+        <button id="computer-scissor">✂️</button>
     </div>
     <div class="container">
         <button id="rock">🪨</button>
@@ -73,56 +74,74 @@
     <div class="score-board">
         <h1>Score</h1>
         <p>Computer: <span id="computer-score">0</span><br>
-           User: <span id="user-score">0</span>
+            User: <span id="user-score">0</span>
         </p>
-    </div>        
+    </div>
 
     <script>
 
 
-        const container=document.querySelector(".container");
-        container.addEventListener("click",function(e)
-            {
-            const computer_score=document.querySelector("#computer-score");
-            const user_score=document.querySelector("#user-score");
+        function resetButtonColor() {
+            const allButtons = Array.from(document.querySelectorAll("button"));
+            allButtons.forEach(function (e) {
+                e.style.backgroundColor = "#E9E9ED";
+            })
+        }
+        function animateWinnerButtonColor(e) {
+            e.style.backgroundColor = "#64E27C";
+        }
+        function animateLoserButtonColor(e) {
+            e.style.backgroundColor = "#EB7145";
+        }
+        function animateTieButtonColor(e) {
+            e.style.backgroundColor = "#E7E610";
+        }
+
+        const container = document.querySelector(".container");
+        container.addEventListener("click", function (e) {
+            resetButtonColor();
+            const computer_score = document.querySelector("#computer-score");
+            const user_score = document.querySelector("#user-score");
             let winner;
-            if(e.target.id==="rock"|| e.target.id==="paper"|| e.target.id==="scissor")
-            winner=playRound(e.target.id);  
-            if(winner==="user"){
-                console.log("User Won this Round");
-                humanScore++;
+            if (e.target.id === "rock" || e.target.id === "paper" || e.target.id === "scissor") {
+                winner = playRound(e.target.id);
+                if (winner === "user") {
+                    console.log("User Won this Round");
+                    humanScore++;
+                    animateWinnerButtonColor(e.target);
+                }
+                else if (winner === "computer") {
+                    console.log("Computer Won this Round");
+                    computerScore++;
+                    animateLoserButtonColor(e.target);
+                }
+                else if (winner === "tie") {
+                    animateTieButtonColor(e.target);
+                    console.log("This Round has been Tied");
+                }
+                else if (winner === "invalid") {
+                    console.log("Invalid Input by the user");
+                    i--;
+                }
+                computer_score.textContent = computerScore;
+                user_score.textContent = humanScore;
             }
-            else if(winner==="computer")
-            {
-                console.log("Computer Won this Round");
-                computerScore++;
-            }
-            else if(winner==="tie")
-                console.log("This Round has been Tied");
-            else if(winner==="invalid")
-            {
-                console.log("Invalid Input by the user");
-                i--;
-            }
-            computer_score.textContent=computerScore;
-            user_score.textContent=humanScore;
-            });
+        }
+        );
 
 
 
         console.log("Hello World!!!");
 
         //Global Variables
-        let humanScore=0;
-        let computerScore=0;
+        let humanScore = 0;
+        let computerScore = 0;
 
         //Get Computer Choice
 
-        function getComputerChoice()
-        {
-            let choiceComputer=Math.floor(Math.random()*3)+1;
-            switch(choiceComputer)
-            {
+        function getComputerChoice() {
+            let choiceComputer = Math.floor(Math.random() * 3) + 1;
+            switch (choiceComputer) {
                 case 1: return "rock";
                 case 2: return "paper";
                 case 3: return "scissor";
@@ -131,33 +150,46 @@
 
         //Play Round
 
-        function playRound(humanChoice)
-        {
-            const computerChoice=getComputerChoice();
+        function playRound(humanChoice) {
+            const computerChoice = getComputerChoice();
             console.log(`Computer Chose:${computerChoice}\nUser Chose:${humanChoice}\n`);
             //When Human is Winner
-            if(humanChoice==="rock" && computerChoice === "scissor")
+            if (humanChoice === "rock" && computerChoice === "scissor") {
+                animateLoserButtonColor(document.getElementById("computer-" + computerChoice));
                 return "user";
-            else if(humanChoice==="paper" && computerChoice === "rock")
+            }
+            else if (humanChoice === "paper" && computerChoice === "rock") {
+                animateLoserButtonColor(document.getElementById("computer-" + computerChoice));
                 return "user";
-            else if(humanChoice==="scissor" && computerChoice === "paper")
+            }
+            else if (humanChoice === "scissor" && computerChoice === "paper") {
+                animateLoserButtonColor(document.getElementById("computer-" + computerChoice));
                 return "user";
+            }
 
             //When Computer is Winnner
-            else if(humanChoice==="rock" && computerChoice === "paper")
+            else if (humanChoice === "rock" && computerChoice === "paper") {
+                animateWinnerButtonColor(document.getElementById("computer-" + computerChoice));
                 return "computer";
-            else if(humanChoice==="paper" && computerChoice === "scissor")
+            }
+            else if (humanChoice === "paper" && computerChoice === "scissor") {
+                animateWinnerButtonColor(document.getElementById("computer-" + computerChoice));
                 return "computer";
-            else if(humanChoice==="scissor" && computerChoice === "rock")
+            }
+            else if (humanChoice === "scissor" && computerChoice === "rock") {
+                animateWinnerButtonColor(document.getElementById("computer-" + computerChoice));
                 return "computer";
-            else if(humanChoice===computerChoice)
+            }
+            else if (humanChoice === computerChoice) {
+                animateTieButtonColor(document.getElementById("computer-" + computerChoice));
                 return "tie";
-            else
-                {
+            }
+            else {
                 return "invalid";
-                }
+            }
+
         }
-        
+
 
         // if(computerScore>humanScore)
         //     console.log(`You Lose Computer is the Winner\t\t Human:${humanScore},Computer:${computerScore}`);
@@ -167,4 +199,5 @@
         //     console.log(`Oh! It's a tie!!\t\t Human:${humanScore},Computer:${computerScore}`);
     </script>
 </body>
+
 </html>
