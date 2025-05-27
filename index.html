@@ -80,6 +80,17 @@
 
     <script>
 
+        const computer_score = document.querySelector("#computer-score");
+        const user_score = document.querySelector("#user-score");
+
+        function resetScore()
+        {
+            resetButtonColor();
+            humanScore=0;
+            computerScore=0;
+            computer_score.textContent = computerScore;
+            user_score.textContent = humanScore;
+        }
 
         function resetButtonColor() {
             const allButtons = Array.from(document.querySelectorAll("button"));
@@ -100,8 +111,6 @@
         const container = document.querySelector(".container");
         container.addEventListener("click", function (e) {
             resetButtonColor();
-            const computer_score = document.querySelector("#computer-score");
-            const user_score = document.querySelector("#user-score");
             let winner;
             if (e.target.id === "rock" || e.target.id === "paper" || e.target.id === "scissor") {
                 winner = playRound(e.target.id);
@@ -187,7 +196,6 @@
             else {
                 return "invalid";
             }
-
         }
 
 
