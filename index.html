@@ -23,6 +23,7 @@
         {
             color: rgb(0, 0, 0);
             text-shadow: rgba(145, 140, 140, 0.72) -1px 2px 4px;
+            margin: 40px 0px;
         }
         button {
             height: 150px;
@@ -107,7 +108,7 @@
 
     <div class="playArea">
 
-        <h1 class="game-title">Tic-Tac-Toe</h1>
+        <h1 class="game-title">Tic-Tac-Toe 🧩</h1>
         <div class="computerContainer">
             <button id="computer-rock">🪨</button>
             <button id="computer-paper">🧻</button>
@@ -155,7 +156,7 @@
             user_score.textContent = humanScore;
             userContainer.style.display="flex";
             computerContainer.style.display="flex";
-            gameTitle.textContent="Tic-Tac-Toe";
+            gameTitle.textContent="Tic-Tac-Toe 🧩";
         }
         resetBtn.addEventListener("click",resetScore);
 
@@ -190,21 +191,21 @@
             if (e.target.id === "rock" || e.target.id === "paper" || e.target.id === "scissor") {
                 winner = playRound(e.target.id);
                 if (winner === "user") {
-                    console.log("User Won this Round");
+                    //console.log("User Won this Round");
                     humanScore++;
                     animateWinnerButtonColor(e.target);
                 }
                 else if (winner === "computer") {
-                    console.log("Computer Won this Round");
+                    //console.log("Computer Won this Round");
                     computerScore++;
                     animateLoserButtonColor(e.target);
                 }
                 else if (winner === "tie") {
                     animateTieButtonColor(e.target);
-                    console.log("This Round has been Tied");
+                    //console.log("This Round has been Tied");
                 }
                 else if (winner === "invalid") {
-                    console.log("Invalid Input by the user");
+                    //console.log("Invalid Input by the user");
                     i--;
                 }
                 computer_score.textContent = computerScore;
@@ -243,7 +244,7 @@
 
         function playRound(humanChoice) {
             const computerChoice = getComputerChoice();
-            console.log(`Computer Chose:${computerChoice}\nUser Chose:${humanChoice}\n`);
+            //console.log(`Computer Chose:${computerChoice}\nUser Chose:${humanChoice}\n`);
             //When Human is Winner
             if (humanChoice === "rock" && computerChoice === "scissor") {
                 animateLoserButtonColor(document.getElementById("computer-" + computerChoice));
