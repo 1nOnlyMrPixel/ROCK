@@ -23,7 +23,7 @@
             border-radius: 20px;
         }
 
-        .container {
+        .userContainer {
             display: flex;
             height: 200px;
             width: 100vw;
@@ -38,7 +38,7 @@
             height: 100px;
             width: 100vw;
             align-items: center;
-            justify-content: center;
+            /* justify-content: center; */
             text-align: center;
             box-sizing: border-box;
         }
@@ -56,28 +56,47 @@
             justify-content: center;
             justify-content: space-evenly;
         }
+        .playArea
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .game-title
+        {
+            color: rgb(0, 0, 0);
+            text-shadow: rgba(145, 140, 140, 0.72) -1px 2px 4px;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="computerContainer">
-        <button id="computer-rock">🪨</button>
-        <button id="computer-paper">🧻</button>
-        <button id="computer-scissor">✂️</button>
+    <div class="playArea">
+        <h1 class="game-title">Tic-Tac-Toe</h1>
+        <div class="computerContainer">
+            <button id="computer-rock">🪨</button>
+            <button id="computer-paper">🧻</button>
+            <button id="computer-scissor">✂️</button>
+        </div>
+        
+    
+        <div class="userContainer">
+            <button id="rock">🪨</button>
+            <button id="paper">🧻</button>
+            <button id="scissor">✂️</button>
+        </div>
+        
+        
+        <div class="score-board">
+            <h1>Score</h1>
+            <p>Computer: <span id="computer-score">0</span><br>
+                User: <span id="user-score">0</span>
+            </p>
+        </div>
     </div>
-    <div class="container">
-        <button id="rock">🪨</button>
-        <button id="paper">🧻</button>
-        <button id="scissor">✂️</button>
-    </div>
-    <div class="score-board">
-        <h1>Score</h1>
-        <p>Computer: <span id="computer-score">0</span><br>
-            User: <span id="user-score">0</span>
-        </p>
-    </div>
-
+        
     <script>
 
         const computer_score = document.querySelector("#computer-score");
@@ -108,8 +127,8 @@
             e.style.backgroundColor = "#E7E610";
         }
 
-        const container = document.querySelector(".container");
-        container.addEventListener("click", function (e) {
+        const userContainer = document.querySelector(".userContainer");
+        userContainer.addEventListener("click", function (e) {
             resetButtonColor();
             let winner;
             if (e.target.id === "rock" || e.target.id === "paper" || e.target.id === "scissor") {
@@ -197,6 +216,7 @@
                 return "invalid";
             }
         }
+
 
 
         // if(computerScore>humanScore)
