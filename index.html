@@ -134,12 +134,18 @@
         
     <script>
 
+
+        //Global Variables
+        let humanScore = 0;
+        let computerScore = 0;
         const computer_score = document.querySelector("#computer-score");
         const user_score = document.querySelector("#user-score");
         const allButtons = Array.from(document.querySelectorAll("button"));
         const userContainer = document.querySelector(".userContainer");
         const computerContainer=document.querySelector(".computerContainer");
         const resetBtn=document.querySelector(".resetBtn");
+        const gameTitle=document.querySelector(".game-title");
+
         function resetScore()
         {
             resetButtonColor();
@@ -147,8 +153,10 @@
             computerScore=0;
             computer_score.textContent = computerScore;
             user_score.textContent = humanScore;
+            userContainer.style.display="flex";
+            computerContainer.style.display="flex";
+            gameTitle.textContent="Tic-Tac-Toe";
         }
-
         resetBtn.addEventListener("click",resetScore);
 
 
@@ -161,6 +169,8 @@
             }
             })
         }
+
+
         function animateWinnerButtonColor(e) {
             e.style.backgroundColor = "#64E27C";
             e.style.border = "1px solid #64E27C";
@@ -199,18 +209,25 @@
                 }
                 computer_score.textContent = computerScore;
                 user_score.textContent = humanScore;
+                if(humanScore >4 || computerScore>4)
+                    {
+                        userContainer.style.display="none";
+                        computerContainer.style.display="none";
+                    }
+                if(computerScore>4)
+                {
+                    gameTitle.textContent="You Lost to Computer 😔";
+                }
+                if(humanScore>4)
+                {
+                    gameTitle.textContent="You Won 🥳";
+                }
             }
         }
         );
 
 
-
-        console.log("Hello World!!!");
-
-        //Global Variables
-        let humanScore = 0;
-        let computerScore = 0;
-
+       
         //Get Computer Choice
 
         function getComputerChoice() {
@@ -262,18 +279,6 @@
                 return "invalid";
             }
         }
-
-if(humanScore >4 || computerScore>4)
-{
-    
-}
-
-        // if(computerScore>humanScore)
-        //     console.log(`You Lose Computer is the Winner\t\t Human:${humanScore},Computer:${computerScore}`);
-        // else if(humanScore>computerScore)
-        //     console.log(`Yay You Won\t\t Human:${humanScore},Computer:${computerScore}`);
-        // else if(humanScore===computerScore)
-        //     console.log(`Oh! It's a tie!!\t\t Human:${humanScore},Computer:${computerScore}`);
     </script>
 </body>
 
